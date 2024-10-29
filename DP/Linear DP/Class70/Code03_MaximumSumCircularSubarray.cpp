@@ -6,3 +6,17 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+class Solution {
+public:
+    int maxSubarraySumCircular(vector<int>& nums) {
+        int n = nums.size(), all = nums[0], minsum = nums[0], maxsum = nums[0];
+        for (int i = 1, minpre = nums[0], maxpre = nums[0]; i < n; i++) {
+            all += nums[i];
+            maxpre = max(nums[i], nums[i] + maxpre);
+            maxsum = max(maxsum, maxpre);
+            minpre = min(nums[i], nums[i] + minpre);
+            minsum = min(minsum, minpre);
+        }
+        return all == minsum ? maxsum : max(maxsum, all - minsum);
+    }
+};
