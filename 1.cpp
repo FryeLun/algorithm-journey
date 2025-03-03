@@ -1,39 +1,33 @@
 #include <bits/stdc++.h>
 using namespace std;
+typedef long long ll;
 
 int main() {
-    int n;
+    ll n;
     cin >> n;
-    for (int i = 0; i < n; i++) {
-        int cnt = 0, time = 0;
-        int mm[1010][10];
-        int book;
-        char c;
-        while (1) {
-            int h, m;
-            cin >> book >> c >> h;
-            getchar();
-            cin >> m;
-            if (book == 0) {
-                break;
-            }
-            if (c == 'S') {
-                mm[book][0] = book;
-                mm[book][1] = 1;
-                mm[book][2] = h;
-                mm[book][3] = m;
-                continue;
-            }
-            if (c == 'E' && mm[book][1] == 1) {
-                time += h * 60 + m - mm[book][2] * 60 - mm[book][3];
-                mm[book][1] = 0;
-                cnt++;
+    vector<ll> a;
+    for(int i = 2, tmp = 0; i <= sqrt(n); i++) {
+        if(n % i == 0) {
+            a.push_back(i);
+        }
+    }
+    int cnt = 1, nmax = 0, index = 0;
+    for(int i = 1; i < a.size(); i++) {
+        if(a[i - 1]== a[i] - 1) {
+            cnt++;
+        } else {
+            if(cnt > nmax) {
+                nmax = cnt;
+                index = i - cnt;
+                cnt = 1;
             }
         }
-        if (cnt == 0) {
-            cout << 0 << " " << 0 << endl;
-        } else {
-            cout << cnt << " " << (time + cnt - 1) / cnt << endl;
+    }
+    cout << nmax << endl;
+    for(int i = index; i < index + nmax; i++) {
+        cout << a[i];
+        if(i != index + nmax - 1) {
+            cout << '*';
         }
     }
     return 0;
