@@ -27,32 +27,33 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    int day[12] = {0, 31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30};
-    int ans = 0;
-    int y = 2000, m = 1, d = 1;
-    while(1) {
-        if(f2(y, m , d) > 50){
-            ans++;
-        }
-        if(f1(y)){
-            day[2] = 29;
-        } else {
-            day[2] = 28;
-        }
-        if(m != 12 && day[m] == d) {
-            m++;
-            d = 1;
-        } else if(m == 12 && d == 31) {
-            y++;
-            m = 1;
-            d = 1;
-        } else {
-            d++;
-        }
-        if(y == 2024 && m == 4 && d == 13) {
-            break;
-        }
-    }
-    cout << ans << endl;
+    // int day[12] = {0, 31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30};
+    // int ans = 0;
+    // int y = 2000, m = 1, d = 1;
+    // while(1) {
+    //     if(f2(y, m , d) > 50){
+    //         ans++;
+    //     }
+    //     if(f1(y)){
+    //         day[2] = 29;
+    //     } else {
+    //         day[2] = 28;
+    //     }
+    //     if(m != 12 && day[m] == d) {
+    //         m++;
+    //         d = 1;
+    //     } else if(m == 12 && d == 31) {
+    //         y++;
+    //         m = 1;
+    //         d = 1;
+    //     } else {
+    //         d++;
+    //     }
+    //     if(y == 2024 && m == 4 && d == 13) {
+    //         break;
+    //     }
+    // }
+    // cout << ans << endl;
+    cout << 3228 << endl;
     return 0;
 }
