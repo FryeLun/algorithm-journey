@@ -1,29 +1,40 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
 
-const int MAXN = 1e6 + 5;
-ll n, s, p[MAXN], c[MAXN], tmp[MAXN], sum, ans, all;
+const int N = 1e6 + 10;
+ll n, s;
+
+struct Node{
+	ll p, c;
+};
+
+bool cmp(const Node &a, const Node &b) {
+	return a.c < b.c;
+}
 
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(0);
 	cout.tie(0);
 	cin >> n >> s;
-	for(int i = 1; i <= n; i++) {
-		cin >> p[i] >> c[i];
-		tmp[c[i]] += p[i];
-		sum += p[i];
-		all += p[i] * c[i];
+	vector<Node> a(n);
+	ll sum = 0, ans = 0;
+	for(int i = 0; i < n; i++) {
+		cin >> a[i].p >> a[i].c;
+		sum += a[i].p;
 	}
-	for(int i = 1; i <= 1e6; i++) {
-		if(sum < s){
-			break;
+	sort(a.begin(), a.end(), cmp);
+	ll cnt = 0;
+	for(int i = 0; i < n; i++) {
+		if(sum < s) {
+			ans += a[i].p * (a[i].c - cnt);
+		} else {
+			ans += s * (a[i].c - cnt);
+			sum -= a[i].p;
+			cnt += (a[i].c - cnt);
 		}
-		ans += s;
-		all -= sum;
-		sum -= tmp[i];
 	}
-	cout << ans + all << endl;
+	cout << ans << endl;
 	return 0;
 }
